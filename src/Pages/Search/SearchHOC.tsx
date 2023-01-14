@@ -1,99 +1,77 @@
-import { useState, useEffect } from 'react';
-import { fetchBooks } from '../../Store/BookActions';
+import { useState, useEffect, useRef, FC } from 'react';
+import { fetchBooks, searchBooks } from '../../Store/BookActions';
 import { useSelector, useDispatch } from 'react-redux';
+import { bookActions } from '../../Store/BookSlice';
 import { Book } from '../../Common/Models/Book.interface';
+import { BooksPerShelf } from '../../Common/Models/BooksPerShelf.interface';
 
 const SearchHOC = (props: {
-    Search: any
+    Search: FC<{
+        isLoading: boolean,
+        changeFilterValue: React.ChangeEventHandler<HTMLInputElement>;
+        books: Book[] | null
+    }>
 }) => {
 
-    let allBooks: Book[] = [];
+    const [searching, setSearchingFlag] = useState<boolean>(false);
 
-    const [currentFilteredBooks, setCurrentFilteredBooks ] = useState<Book[]>([]);
-
-    const [filterValue, setFilterValue ] = useState<string>('');
+    const [searchValue, setSearchValue] = useState<string>('');
 
     const dispatch = useDispatch();
 
-    const allBooksPerShelf = useSelector((state: any) => state.books.allBooksPerShelf);
+    let timeout: {
+        current: NodeJS.Timeout | undefined
+    } = useRef();
 
-    // const filteredBooks = useSelector((state: any) => state.books.filteredBooks);
+    const booksForQuery = useSelector((state: any) => state.books.booksForQuery);
 
-    const filterBookBy = (book: Book, property: 'title' | 'authors' | 'industryIdentifiers') => {
+    const allBooksPerShelf: BooksPerShelf = useSelector((state: any) => state.books.allBooksPerShelf);
 
-        if (typeof book[property] === 'string') {
+    const changeFilterValue = (event: any) => {
 
-            return (book[property] as string).toLowerCase().includes(filterValue);
-        } else if (Array.isArray(book[property])){
+        setSearchingFlag(true);
 
-           return !!(book[property] as Array<string>)
-           .map((value: string) => value.toLowerCase())
-           .filter((value: string) => value.includes(filterValue)).length;
-        }
+        clearTimeout(timeout.current);
 
-        return false;
-    };
+        timeout.current = setTimeout(() => {
 
-    const changeFilterValue = (event: any) =>{
-        const userInput = event.target.value ? event.target.value.trim().toLowerCase() : '';
+            const userInput = event.target.value ? event.target.value.trim().toLowerCase() : '';
 
-        setFilterValue(userInput);
+            if (searchValue !== userInput) {
 
-        filterBooks();
-    };
+                setSearchValue(userInput);
 
-    const filterBooks = () => {
+                if (userInput) {
 
-        if (filterValue && allBooksPerShelf) {
+                    dispatch(searchBooks(userInput) as any);
+                } else {
 
-            // const allBooks: Book[] = [...allBooksPerShelf['currentlyReading'], ...allBooksPerShelf['wantToRead'], ...allBooksPerShelf['read']];
-
-            let filteredBooks: Book[] = allBooks.filter((book: Book) => {
-                return filterBookBy(book, 'title') || 
-                 filterBookBy(book, 'authors') ||
-                 filterBookBy(book, 'industryIdentifiers');
-            });
-
-            // dispatch(setFilteredBooks(filteredBooks) as any);
-            setCurrentFilteredBooks(filteredBooks);
-        } else {
-
-            setCurrentFilteredBooks([]);
-        }
-    }
-
-    const sortBooks = (book1: Book, book2: Book) => {
-        if (book1.id < book2.id) {
-            return -1;
-        }
-        if (book1.id > book2.id) {
-            return 1;
-        }
-        return 0;
-    };
-
-    useEffect(() => {
-        if (allBooksPerShelf) {
-
-            allBooks = [...allBooksPerShelf['currentlyReading'], ...allBooksPerShelf['wantToRead'], ...allBooksPerShelf['read']];
-
-              allBooks.sort(sortBooks);
-
-            if (filterValue) {
-    
-                filterBooks();
+                    dispatch(bookActions.searchForBooks({
+                        booksForQuery: null,
+                    }));
+                }
+            } else {
+                setSearchingFlag(false);
             }
-        }
-    }, [filterValue, allBooksPerShelf]);
+        }, 500);
+    };
 
     useEffect(() => {
-        // console.log('dispatching');
-        dispatch(fetchBooks() as any);
-    }, [dispatch]);
+        if (!allBooksPerShelf) {
+            dispatch(fetchBooks() as any);
+        }
+    }, [dispatch, allBooksPerShelf]);
+
+    useEffect(() => {
+        setSearchingFlag(false);
+    }, [booksForQuery]);
 
     return (
         <>
-            <props.Search changeFilterValue={changeFilterValue} books={currentFilteredBooks} />
+            {
+                <props.Search isLoading={allBooksPerShelf && !searching} changeFilterValue={changeFilterValue}
+                    books={booksForQuery} />
+            }
         </>
     )
 };

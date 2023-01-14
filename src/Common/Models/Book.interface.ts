@@ -4,6 +4,7 @@ export interface Book{
     subtitle: string;
     authors: string[];
     image: string;
-    shelf: string;
+    shelf?: 'currentlyReading' | 'wantToRead' | 'read' | 'none';
+    mainShelf?: 'currentlyReading' | 'wantToRead' | 'read' | 'none';
     industryIdentifiers: string[];
 }

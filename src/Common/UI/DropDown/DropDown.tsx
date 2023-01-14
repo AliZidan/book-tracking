@@ -1,14 +1,10 @@
-import { useState } from 'react';
-import { useDispatch } from 'react-redux';
 import classes from './DropDown.module.css';
-import { bookActions } from '../../../Store/BookSlice';
 
 const DropDown = (props: {
   currentShelf: string,
   bookId: string,
+  handleShelfChange: React.ChangeEventHandler<HTMLSelectElement>
 }) => {
-
-    const dispatch = useDispatch();
 
     const shelfs = [{
         text: 'Currently Reading',
@@ -23,19 +19,9 @@ const DropDown = (props: {
         value: 'read'
     }];
 
-    const handleChange = (event: any) => {
-        const newShelf: 'currentlyReading' | 'wantToRead' | 'read' = event.target.value;
-
-        dispatch(bookActions.changeShelf({
-            bookId: props.bookId,
-            currentShelf: props.currentShelf,
-            newShelf: newShelf,
-        } as any));
-    };
-
   return (
     <div className={classes["book-shelf-changer"]}>
-    <select  value={props.currentShelf} onChange={handleChange} >
+    <select  value={props.currentShelf} onChange={props.handleShelfChange} >
       <option value="none" disabled>
         Move to...
       </option>

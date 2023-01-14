@@ -12,11 +12,10 @@ const BookShelf = (props: {
       <h2 className={classes["bookshelf-title"]}>{props.shelfName}</h2>
       <div className={classes["bookshelf-books"]}>
         <ol className={classes["books-grid"]}>
-
           {
-            props.books.map((book: BookInterface) => {
+            (Array.isArray(props.books) && props.books.length) ? (props.books.map((book: BookInterface) => {
               return <Book key={book.id} book={book} />
-            })
+            })) : (<h1 style={{color: '#2e7c31'}}> No Books For This Shelf</h1>)
           }
         </ol>
       </div>
