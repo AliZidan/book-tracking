@@ -1,4 +1,5 @@
 import './App.css';
+import React from 'react';
 import DashBoardHOC from './Pages/Dashboard/DashBoardHOC';
 import SearchHOC from './Pages/Search/SearchHOC';
 import DashBoard from './Pages/Dashboard/DashBoard';

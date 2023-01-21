@@ -1,4 +1,5 @@
 import classes from './DropDown.module.css';
+import React from 'react';
 
 const DropDown = (props: {
   currentShelf: string,
@@ -21,7 +22,7 @@ const DropDown = (props: {
 
   return (
     <div className={classes["book-shelf-changer"]}>
-    <select  value={props.currentShelf} onChange={props.handleShelfChange} >
+    <select data-testid="shelf-dropdown" value={props.currentShelf} onChange={props.handleShelfChange} >
       <option value="none" disabled>
         Move to...
       </option>

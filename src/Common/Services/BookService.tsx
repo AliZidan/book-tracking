@@ -66,7 +66,7 @@ export const searchForBooks = (query: string, maxResults: number) =>
           });
         }
       }
- 
+
       return books;
     });
 

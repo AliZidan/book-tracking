@@ -1,6 +1,7 @@
 import Book from '../Book/Book';
 import { Book as BookInterface } from '../../Models/Book.interface';
 import classes from './BookShelf.module.css';
+import React from 'react';
 
 const BookShelf = (props: {
   shelfName: string,

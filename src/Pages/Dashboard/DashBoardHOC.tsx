@@ -1,3 +1,4 @@
+import React from "react";
 import { FC, useEffect } from 'react';
 import { fetchBooks } from '../../Store/BookActions';
 import { useSelector, useDispatch } from 'react-redux';
@@ -13,13 +14,14 @@ const DashBoardHOC = (props: {
 
     const allBooksPerShelf: BooksPerShelf = useSelector((state: any) => state.books.allBooksPerShelf);
 
-    dispatch(bookActions.searchForBooks({
-      booksForQuery: null,
-    }));
+    useEffect(() =>{
+      dispatch(bookActions.searchForBooks({
+        booksForQuery: null,
+      }));
+    }, []);
 
     useEffect(() => {
       if (!allBooksPerShelf) {
-
         dispatch(fetchBooks() as any);
       }
     },[dispatch, allBooksPerShelf]);

@@ -4,6 +4,7 @@ import Book from '../../Common/UI/Book/Book';
 import classes from './Search.module.css';
 import { useNavigate } from 'react-router-dom';
 import Spinner from '../../Common/UI/Spinner/Spinner';
+import React from 'react';
 
 const Search: FC<{
   isLoading: boolean,
@@ -21,7 +22,7 @@ const Search: FC<{
 
   return (
     <>
-      <div>
+      <div >
         <div className={classes["search-books-bar"]}>
           <a
             className={classes["close-search"]}
@@ -39,6 +40,7 @@ const Search: FC<{
           </div>
         </div>
 
+        <div id="search-testing-area" >
         {
           props.isLoading ?
             <div className={classes["search-books-results"]}>
@@ -46,12 +48,12 @@ const Search: FC<{
                 {
                   (Array.isArray(props.books) && props.books.length) ? (props.books.map((book: BookInterface) => {
                     return <Book key={book.id} book={book} />
-                  })) : (<h1 style={{ color: '#2e7c31' }}> No Results For The Current Query</h1>)
+                  })) : (<h1 style={{ color: '#2e7c31' }}>No Results For The Current Query</h1>)
                 }
               </ol>
             </div> : <Spinner />
         }
-
+        </div>
       </div>
     </>
   );

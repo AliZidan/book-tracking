@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import React, { FC } from 'react';
 import { BooksPerShelf } from '../../Common/Models/BooksPerShelf.interface';
 import BookShelf from '../../Common/UI/BookShelf/BookShelf';
 import Spinner from '../../Common/UI/Spinner/Spinner';

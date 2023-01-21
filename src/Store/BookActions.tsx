@@ -13,16 +13,16 @@ export const fetchBooks = () => {
       dispatch(
         bookActions.setBooks({
           allBooksPerShelf: booksPerShelf || [],
-          shelfChanges: localStorage.getItem('shelfChanges')
         })
       );
     } catch (error) {
-    alert('Searching books failed');
+    // alert('Searching books failed');
     }
   };
 };
 
 export const searchBooks = (query: string) => {
+
   return async (dispatch: any) => {
     const searchForABook = async () => {
       const response = await searchForBooks(query, 10);
@@ -31,13 +31,14 @@ export const searchBooks = (query: string) => {
 
     try {
       const booksForQuery = await searchForABook();
+
       dispatch(
         bookActions.searchForBooks({
           booksForQuery: booksForQuery || [],
         })
       );
     } catch (error) {
-    alert('Loading books failed');
+    // alert('Loading books failed');
     }
   };
 };
@@ -60,7 +61,7 @@ export const updateBook = (bookId: string, newShelf: string, currentShelf: strin
         } as any)
       );
     } catch (error) {
-    alert('Updating book failed');
+    // alert('Updating book failed');
     }
   };
 };

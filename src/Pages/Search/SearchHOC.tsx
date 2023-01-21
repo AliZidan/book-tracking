@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { bookActions } from '../../Store/BookSlice';
 import { Book } from '../../Common/Models/Book.interface';
 import { BooksPerShelf } from '../../Common/Models/BooksPerShelf.interface';
+import React from 'react';
 
 const SearchHOC = (props: {
     Search: FC<{
@@ -63,13 +64,13 @@ const SearchHOC = (props: {
     }, [dispatch, allBooksPerShelf]);
 
     useEffect(() => {
-        setSearchingFlag(false);
+          setSearchingFlag(false);
     }, [booksForQuery]);
 
     return (
         <>
             {
-                <props.Search isLoading={allBooksPerShelf && !searching} changeFilterValue={changeFilterValue}
+                <props.Search isLoading={!allBooksPerShelf || !searching} changeFilterValue={changeFilterValue}
                     books={booksForQuery} />
             }
         </>
