@@ -1,5 +1,7 @@
 import { Book } from "../Models/Book.interface";
 import { BooksPerShelf } from "../Models/BooksPerShelf.interface";
+import * as APIS from "../Constants/API_URLS";
+
 const api = "https://reactnd-books-api.udacity.com";
 
 let token = localStorage.token;
@@ -11,8 +13,8 @@ const headers = {
   Authorization: token,
 };
 
-export const getAllBooks = () =>
-  fetch(`${api}/books`, { headers })
+export const getAllBooks: () => Promise<BooksPerShelf> = () =>
+  fetch(`${api}/${APIS.default.GET_ALL_BOOKS.url}`, { headers })
     .then((res) => res.json())
     .then((res) => res.books)
     .then((booksResponse: any) => {
@@ -37,8 +39,8 @@ export const getAllBooks = () =>
       return booksPerShelf;
     });
 
-export const searchForBooks = (query: string, maxResults: number) =>
-  fetch(`${api}/search`, {
+export const searchForBooks: (query: string, maxResults: number) => Promise<Book[]> = (query: string, maxResults: number) =>
+  fetch(`${api}/${APIS.default.SEARCH_FOR_BOOKS.url}`, {
     method: "POST",
     headers: {
       ...headers,
@@ -70,13 +72,8 @@ export const searchForBooks = (query: string, maxResults: number) =>
       return books;
     });
 
-export const getBookDetails = (bookId: string) =>
-  fetch(`${api}/books/${bookId}`, { headers })
-    .then((res) => res.json())
-    .then((data) => data);
-
-export const update = (bookId: string, shelf: string) =>
-  fetch(`${api}/books/${bookId}`, {
+export const updateBookShelf = (bookId: string, shelf: string) =>
+  fetch(`${api}/${APIS.default.UPDATE_BOOK.url(bookId)}`, {
     method: "PUT",
     headers: {
       ...headers,

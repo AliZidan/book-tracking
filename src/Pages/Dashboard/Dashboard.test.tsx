@@ -10,7 +10,7 @@ describe('DashBoardHOC', function () {
 
    it('Expect books list to be shown in the Dashboard page', async () => {
 
-      const some: any = jest.fn(() => Promise.resolve({
+      const fetchMocking: any = jest.fn(() => Promise.resolve({
          json: () => Promise.resolve({
                     "books": [
                       {
@@ -153,7 +153,7 @@ describe('DashBoardHOC', function () {
          })
       }));
 
-      global.fetch = some;
+      global.fetch = fetchMocking;
 
       const searchComponent = renderWithProviders(
          <DashBoardHOC DashBoard={DashBoard} />, {
@@ -188,7 +188,7 @@ describe('DashBoardHOC', function () {
 
    it('Expect changing shelf is working correctly In Overview', async () => {
 
-    const some: any = jest.fn(() => Promise.resolve({
+    const fetchMocking: any = jest.fn(() => Promise.resolve({
         json: () => Promise.resolve({
                    "books": [
                      {
@@ -331,7 +331,7 @@ describe('DashBoardHOC', function () {
         })
      }));
 
-    global.fetch = some;
+    global.fetch = fetchMocking;
 
     const searchComponent = renderWithProviders(
         <DashBoardHOC DashBoard={DashBoard} />, {

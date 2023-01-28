@@ -5,9 +5,8 @@ import DropDown from "./DropDown";
 import { renderWithProviders } from "../../UnitTestUtils/Provider";
 import store from '../../../Store/index';
 import { act } from "react-dom/test-utils";
-import { updateBook } from "../../../Store/BookActions";
 
-fdescribe('DropDownHOC', function () {
+describe('DropDownHOC', function () {
 
     it('Expect change shelf events working correctly', async () => {
         const spy: any = jest.spyOn(store, 'dispatch');

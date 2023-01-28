@@ -1,11 +1,11 @@
-import { Book as BookInterace } from '../../Models/Book.interface';
+import { Book as BookInterface } from '../../Models/Book.interface';
 import DropDown from '../DropDown/DropDown';
 import DropDownHOC from '../DropDown/DropDownHOC';
 import classes from './Book.module.css';
 import React from 'react';
 
 const Book = (props: {
-  book: BookInterace
+  book: BookInterface
 }) => {
 
   return (

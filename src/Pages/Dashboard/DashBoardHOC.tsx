@@ -14,11 +14,11 @@ const DashBoardHOC = (props: {
 
     const allBooksPerShelf: BooksPerShelf = useSelector((state: any) => state.books.allBooksPerShelf);
 
-    useEffect(() =>{
+    useEffect(() => {
       dispatch(bookActions.searchForBooks({
         booksForQuery: null,
       }));
-    }, []);
+    }, [dispatch]);
 
     useEffect(() => {
       if (!allBooksPerShelf) {

@@ -20,8 +20,8 @@ const DropDownHOC = (props: {
 
         const currentShelf: 'currentlyReading' | 'wantToRead' | 'read' | 'none' = props.currentShelf;
 
-         dispatch(updateBook(props.bookId, newShelf, currentShelf) as any);
-    }; 
+        dispatch(updateBook(props.bookId, newShelf, currentShelf) as any);
+    };
 
     return (
         <>

@@ -10,7 +10,7 @@ describe('SearchHOC', function () {
 
    it('Expect books list to be shown in case of searching with valid query', async () => {
 
-      const some: any = jest.fn(() => Promise.resolve({
+      const fetchMocking: any = jest.fn(() => Promise.resolve({
          json: () => Promise.resolve({
             books: [{
                "title": "Learning Web Development with React and Bootstrap",
@@ -50,7 +50,7 @@ describe('SearchHOC', function () {
          })
       }));
 
-      global.fetch = some;
+      global.fetch = fetchMocking;
 
       const searchComponent = renderWithProviders(
          <SearchHOC Search={Search} />, {
@@ -73,7 +73,7 @@ describe('SearchHOC', function () {
 
    it('Expect changing shelf is working correctly In Search', async () => {
 
-      const some: any = jest.fn(() => Promise.resolve({
+      const fetchMocking: any = jest.fn(() => Promise.resolve({
          json: () => Promise.resolve({
             books: [{
                "title": "Learning Web Development with React and Bootstrap",
@@ -113,7 +113,7 @@ describe('SearchHOC', function () {
          })
       }));
 
-      global.fetch = some;
+      global.fetch = fetchMocking;
 
       const searchComponent = renderWithProviders(
          <SearchHOC Search={Search} />, {
@@ -132,7 +132,7 @@ describe('SearchHOC', function () {
 
    it('Expect showing error message if query is empty', async () => {
 
-      const some: any = jest.fn(() => Promise.resolve({
+      const fetchMocking: any = jest.fn(() => Promise.resolve({
          json: () => Promise.resolve({
             books: [{
                "title": "Learning Web Development with React and Bootstrap",
@@ -172,7 +172,7 @@ describe('SearchHOC', function () {
          })
       }));
 
-      global.fetch = some;
+      global.fetch = fetchMocking;
 
          store.dispatch(bookActions.setBooks({
             allBooksPerShelf: null,
