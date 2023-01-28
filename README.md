@@ -6,13 +6,13 @@
 
 # Installation Instructions:
 
-1) "npm install" in the repo directory
+1) Run "npm install" in the repo directory
 
 <!-- ___ -->
 
 # Launcing Instructions:
 
-1) "npm start" in the repo directory
+1) Run "npm start" in the repo directory
 
 ![alt text](https://i.ibb.co/2h5FqhQ/run.png)
 
@@ -20,7 +20,7 @@
 
 # How can you run unit test:
 
-1) "npm test" in the repo directory
+1) Run "npm test" in the repo directory
 
 ![alt text](https://i.ibb.co/25LgnxL/run.png)
 
