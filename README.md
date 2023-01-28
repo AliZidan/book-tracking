@@ -2,13 +2,13 @@ The Project is about book tracking which can help you to track the books that yo
 
 ___
 
-#installation instructions:
+# installation instructions:
 
 1) "npm install" in the repo directory
 
 ___
 
-#launcing instructions:
+# launcing instructions:
 
 1) "npm start" in the repo directory
 
@@ -16,7 +16,7 @@ ___
 
 ___
 
-#How can you run unit test:
+# How can you run unit test:
 
 1) "npm test" in the repo directory
 
