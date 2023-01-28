@@ -1,16 +1,16 @@
 # Project Idea:
 
-** The Project is about book tracking which can help you to track the books that you want to read or already read or books you read right now **
+**The Project is about book tracking which can help you to track the books that you want to read or already read or books you read right now **
 
 ___
 
-# installation instructions:
+# Installation Instructions:
 
 1) "npm install" in the repo directory
 
 ___
 
-# launcing instructions:
+# Launcing Instructions:
 
 1) "npm start" in the repo directory
 
